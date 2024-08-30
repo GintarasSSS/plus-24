@@ -23,6 +23,6 @@ class SendExchangeRates
     {
         $rates = $event->rates;
 
-        Mail::to('gintaras_sova@hotmail.com')->send(new ExchangeRatesMail($rates));
+        Mail::to(env('API_EMAIL'))->send(new ExchangeRatesMail($rates));
     }
 }

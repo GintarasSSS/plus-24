@@ -19,8 +19,4 @@ use App\Http\Controllers\ExchangeRatesController;
 //    return $request->user();
 //});
 
-//Route::controller(ExchangeRatesController::class)->group(function () {
-//    Route::get('/rate', 'show');
-//});
-
 Route::get('/rate', [ExchangeRatesController::class, 'show']);

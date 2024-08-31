@@ -9,16 +9,18 @@ use App\Services\Api\ExchangeRatesApi;
 
 class ExchangeRatesRepository implements ExchangeRatesRepositoryInterface
 {
-    private $api;
+    private ExchangeRatesApi $api;
+    private Rate $rate;
 
-    public function __construct(ExchangeRatesApi $api)
+    public function __construct(Rate $rate, ExchangeRatesApi $api)
     {
         $this->api = $api;
+        $this->rate = $rate;
     }
 
     public function getRates(string $date)
     {
-        $result = Rate::query()->where('date', $date)->first(['base', 'date', 'rates']);
+        $result = $this->rate::query()->where('date', $date)->first(['base', 'date', 'rates']);
 
         if (!$result) {
             $apiRates = $this->api->getRate($date);

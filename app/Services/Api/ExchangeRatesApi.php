@@ -9,25 +9,22 @@ use Mockery\Exception;
 class ExchangeRatesApi implements RatesApiInterface
 {
     private $config;
+    private Client $client;
 
-    public function __construct()
+    public function __construct(Client $client)
     {
         $this->config = config('api.exchange_rates');
+        $this->client = $client;
     }
 
-    public function getRate(string $date)
+    public function getRate(string $date): array
     {
         $result = [];
 
-        $query = http_build_query([
-            'access_key' => $this->config['key'],
-            'symbols' => implode(',', $this->config['symbols']),
-        ]);
-
-        $url = $this->config['url'] . $date . '?' . $query;
+        $url = $this->getUrl($date);
 
         try {
-            $response = (new Client(['verify' => false]))->get($url);
+            $response = $this->client->request('GET', $url, ['verify' => false]);
 
             $rates = json_decode($response->getBody());
 
@@ -41,5 +38,15 @@ class ExchangeRatesApi implements RatesApiInterface
 
             return $result;
         }
+    }
+
+    public function getUrl(string $date): string
+    {
+        $query = http_build_query([
+            'access_key' => $this->config['key'],
+            'symbols' => implode(',', $this->config['symbols']),
+        ]);
+
+        return $this->config['url'] . $date . '?' . $query;
     }
 }

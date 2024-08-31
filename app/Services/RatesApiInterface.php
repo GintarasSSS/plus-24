@@ -4,5 +4,5 @@ namespace App\Services;
 
 interface RatesApiInterface
 {
-    public function getRate(string $date);
+    public function getRate(string $date): array;
 }

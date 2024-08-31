@@ -12,6 +12,7 @@ RUN docker-php-ext-install exif
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs \
     zip
+RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 RUN npm install -g npm@10.2.5
 

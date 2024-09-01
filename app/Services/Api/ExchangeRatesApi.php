@@ -4,7 +4,8 @@ namespace App\Services\Api;
 
 use App\Services\RatesApiInterface;
 use GuzzleHttp\Client;
-use Mockery\Exception;
+use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Log;
 
 class ExchangeRatesApi implements RatesApiInterface
 {
@@ -19,8 +20,6 @@ class ExchangeRatesApi implements RatesApiInterface
 
     public function getRate(string $date): array
     {
-        $result = [];
-
         $url = $this->getUrl($date);
 
         try {
@@ -33,10 +32,10 @@ class ExchangeRatesApi implements RatesApiInterface
                 'date' => $rates->date,
                 'rates' => $rates->rates
             ];
-        } catch (Exception $e) {
+        } catch (RequestException $e) {
             Log::error(__CLASS__ . '::' . __FUNCTION__ . '::' . $e->getMessage());
 
-            return $result;
+            return [];
         }
     }
 

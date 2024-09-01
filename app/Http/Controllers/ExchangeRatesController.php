@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 
 class ExchangeRatesController extends Controller
 {
-    private $repository;
+    private ExchangeRatesRepositoryInterface $repository;
 
     public function __construct(ExchangeRatesRepositoryInterface $repository)
     {

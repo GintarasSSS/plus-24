@@ -4,5 +4,5 @@ namespace App\Interfaces;
 
 interface ExchangeRatesRepositoryInterface
 {
-    public function getRates(string $date);
+    public function getRates(string $date): array;
 }

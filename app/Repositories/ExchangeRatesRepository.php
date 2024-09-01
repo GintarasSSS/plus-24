@@ -18,7 +18,7 @@ class ExchangeRatesRepository implements ExchangeRatesRepositoryInterface
         $this->rate = $rate;
     }
 
-    public function getRates(string $date)
+    public function getRates(string $date): array
     {
         $result = $this->rate::query()->where('date', $date)->first(['base', 'date', 'rates']);
 

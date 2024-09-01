@@ -14,8 +14,4 @@ use App\Http\Controllers\ExchangeRatesController;
 |
 */
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-
 Route::get('/rate', [ExchangeRatesController::class, 'show']);

@@ -21,9 +21,6 @@
 
 - Clone repository
 - `cd plus-24` - go to project directory
-- `./install.sh` or `./start.sh` - run docker containers for project: PHP and MySQL
-- `docker ps` - find running PHP container name, f.e.: `plus-24-php-1`
-- `docker exec -it plus-24-php-1 bash` - go inside of container
 - `cp .env.example .env` - copy environment files
 - Set environment variables in `.env``:
   - MAIL_USERNAME=[your_email]
@@ -31,6 +28,9 @@
   - MAIL_FROM_ADDRESS=[your_email]
   - API_KEY=[your_exchange_rates_api_key]
   - API_EMAIL=[your_email_where_send_test_email]
+- `./install.sh` or `./start.sh` - run docker containers for project: PHP and MySQL
+- `docker ps` - find running PHP container name, f.e.: `plus-24-php-1`
+- `docker exec -it plus-24-php-1 bash` - go inside of container
 - `composer install`
 - `php artisan migrate:fresh`
 - `./stop.sh` - to stop containers
@@ -71,4 +71,5 @@ curl --location 'http://127.0.0.1/api/rate?date=2024-09-01' \
 
 ## Testing
 - Inside of PHP container: `XDEBUG_MODE=coverage php artisan test --coverage`
+  
 ![img_2.png](img_2.png)

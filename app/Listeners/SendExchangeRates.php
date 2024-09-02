@@ -23,6 +23,7 @@ class SendExchangeRates
     {
         $rates = $event->rates;
 
+        // API_EMAIL - shouldn't be hardcoded and should be taken from DB
         Mail::to(env('API_EMAIL'))->send(new ExchangeRatesMail($rates));
     }
 }

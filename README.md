@@ -73,3 +73,11 @@ curl --location 'http://127.0.0.1/api/rate?date=2024-09-01' \
 - Inside of PHP container: `XDEBUG_MODE=coverage php artisan test --coverage`
   
 ![img_2.png](img_2.png)
+
+## Email Example
+
+![img_1.png](img_1.png)
+
+## Email Attachment Example
+
+![img_4.png](img_4.png)

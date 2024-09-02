@@ -10,11 +10,11 @@
 ## Important
 
 - Used API to get Exchange Rates: https://exchangeratesapi.io/
-- Used free account
-- Unable change "base":
+- Used free account to get currencies rates
+- Unable change "base" currency to "US":
   - Documentation https://exchangeratesapi.io/documentation/#historicalrates "base" parameter
   ![img.png](img.png)
-  - Returns error - "Base Currency Access Restricted"
+  - https://exchangeratesapi.io/ API end-point returns an error - "Base Currency Access Restricted"
   ![img_3.png](img_3.png)
 
 ## Launching
@@ -31,12 +31,12 @@
 - `./install.sh` or `./start.sh` - run docker containers for project: PHP and MySQL
 - `docker ps` - find running PHP container name, f.e.: `plus-24-php-1`
 - `docker exec -it plus-24-php-1 bash` - go inside of container
-- `composer install`
-- `php artisan migrate:fresh`
-- `./stop.sh` - to stop containers
+- run `composer install`
+- run `php artisan migrate:fresh`
+- `./stop.sh` - to stop containers, if it needs
 
 ## API end-point
-- `http://127.0.0.1/api/rate?date=2024-09-01` - IMPORTANT: date - today or below
+- `http://127.0.0.1/api/rate?date=2024-09-01` - IMPORTANT: date - must be today or below and format "Y-m-d" (there is validation for it)
 ```
 curl --location 'http://127.0.0.1/api/rate?date=2024-09-01' \
 --header 'Accept: application/json'
@@ -44,7 +44,7 @@ curl --location 'http://127.0.0.1/api/rate?date=2024-09-01' \
 
 ## Authentication
 - This endpoint doesn't have authentication - rates are available on public resources.
-- There is another mine project with authentication - https://github.com/GintarasSSS/cavu
+- There is another project, which I have done, with authentication - https://github.com/GintarasSSS/cavu
 
 ## Response
 ```

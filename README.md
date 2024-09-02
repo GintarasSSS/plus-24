@@ -15,7 +15,7 @@
   - Documentation https://exchangeratesapi.io/documentation/#historicalrates "base" parameter
   ![img.png](img.png)
   - Returns error - "Base Currency Access Restricted"
-  ![img_1.png](img_1.png)
+  ![img_3.png](img_3.png)
 
 ## Launching
 

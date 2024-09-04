@@ -6,9 +6,12 @@ use App\Interfaces\ExchangeRatesRepositoryInterface;
 use App\Jobs\SaveExchangeRates;
 use App\Models\Rate;
 use App\Services\Api\ExchangeRatesApi;
+use Illuminate\Support\Facades\Cache;
 
 class ExchangeRatesRepository implements ExchangeRatesRepositoryInterface
 {
+    const CACHE_KEY = 'exchange_rates::';
+
     private ExchangeRatesApi $api;
     private Rate $rate;
 
@@ -20,7 +23,11 @@ class ExchangeRatesRepository implements ExchangeRatesRepositoryInterface
 
     public function getRates(string $date): array
     {
-        $result = $this->rate::query()->where('date', $date)->first(['base', 'date', 'rates']);
+        if (!($result = Cache::get(self::CACHE_KEY. $date))) {
+            $result = $this->rate::query()->where('date', $date)->first(['base', 'date', 'rates']);
+
+            Cache::put(self::CACHE_KEY. $date, $result);
+        }
 
         if (!$result) {
             $apiRates = $this->api->getRate($date);
